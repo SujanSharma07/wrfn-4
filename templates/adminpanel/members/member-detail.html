@@ -1,0 +1,290 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% block body %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css' %}" rel="stylesheet">
+
+<!-- Main CSS File -->
+<link href="{% static 'assets/css/user-dashboard.css' %}" rel="stylesheet">
+
+
+<link rel="shortcut icon" href="{% static 'images/icons/logo_png.png' %}">
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <div class="white-box">
+                <div class="user-bg"> <img width="100%" alt="user" src="{% static 'plugins/images/large/img1.jpg' %}">
+                    <div class="overlay-box">
+                        <div class="user-content">
+                            <a href="javascript:void(0)"><img src="{{document1.profile.url}}" class="thumb-lg img-circle"
+                                    alt="img"></a>
+                            <h4 class="text-white mt-2">{{user.first_name|capfirst}} {{user.last_name|capfirst}}
+                            </h4>
+                            <h5 class="text-white mt-2">{{user.username}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-btm-box mt-5 d-md-flex">
+                    <div class="col-md-6 col-sm-6 text-center">
+                        <small><b>Status</b> {{user.astatus}}</small>
+                    </div>
+                    <div class="col-md-6 col-sm-6 text-center">
+                        <small><b>Membership</b> {{user.mstatus}}</small>
+                    </div>
+        
+                </div>
+            </div>
+            <a class="btn btn-success" href="{% url 'adminpanel:verfiyuser' user.id %}">Verify This User</a>
+            {% if user.is_active %}
+                <a class="btn btn-danger" href="{% url 'adminpanel:activeuser' user.id %}">Suspend This user</a>
+            {% else %}
+                <a class="btn btn-success" href="{% url 'adminpanel:activeuser' user.id %}">Activate This User</a>
+            {% endif %}
+
+        </div>
+
+        <!-- Column -->
+                                        <div class="user-information mt-3 ">
+                                            <form>
+                                                <nav>
+                                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                                                            aria-controls="nav-home" aria-selected="true">Basic Information</a>
+                                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                                                            aria-controls="nav-profile" aria-selected="false">Membership</a>
+                                                            
+                                                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profession" role="tab"
+                                                                aria-controls="nav-profile" aria-selected="false">Professional</a>
+                                                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                                                            aria-controls="nav-contact" aria-selected="false">Provided documents
+                                                                </a>
+                                                    </div>
+                                                </nav>
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><h6 class="">Basic Information</h6>
+                                                    
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">First
+                                                            Name</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                                                value="{{user.first_name|capfirst}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Last
+                                                            Name</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.last_name|capfirst}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Gender</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{personal.gender}}">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.username}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Phone</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.phone}}">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Date of
+                                                            Birth</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{personal.birth_date}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">State</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{personal.state}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Country</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.country}}">
+                                                        </div>
+                                                    </div>
+                                                </div><!--Nav1-->
+                                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><h5 class="mt-3">Membership Information</h5>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Membership
+                                                            Number</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{user.id}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Membership
+                                                            type</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Bagmati">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Applied
+                                                            Date</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Nepal">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Accepted
+                                                            Date</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Nepal">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Membership
+                                                            Expiry</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Nepal">
+                                                        </div>
+                                                    </div></div><!--Nav2-->
+                                                    <div class="tab-pane fade" id="nav-profession" role="tabpanel" aria-labelledby="nav-profile-tab"><h5 class="mt-3">Professional Information</h5>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Profession
+                                                        </label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{personal.profession}}">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Area of Experties</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{skill.area}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Experience</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{skill.experience}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Hard Skills</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{skill.hard_skills}}">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Soft Skills</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{skill.soft_skills}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Interests</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{skill.interests}}">
+                                                        </div>
+                                                    </div></div><!--Nav3-->
+                                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"><h5 class="mt-3">Provided documents</h5>
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Document Front Side</label>
+                                                        <div class="col-sm-8">
+                                                            <img src="{{ document1.id_front.url}}" width="65%" height="80%">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="form-group row">
+                                                        <label for="staticEmail" class="col-sm-4 col-form-label">Document Back Side</label>
+                                                        <div class="col-sm-8">
+                                                            <img src="{{ document1.id_back.url}}" width="65%" height="80%">
+                                                        </div>
+                                                    </div></div><!--Nav4-->
+                                                </div>
+
+
+                                                
+    
+                                                
+    
+                                                
+ 
+         
+                                             
+
+   
+    
+                                            </form>
+    
+                                        </div>
+    
+                                    </div>
+
+
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+
+<!--Balance footer-->
+<!-- Optional JavaScript -->
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'assets/vendor/jquery-sticky/jquery.sticky.js' %}"></script>
+<script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+<script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+{% endblock %}

@@ -1,0 +1,29 @@
+/*--------------------------------------------------------------
+  # Hero Section
+  --------------------------------------------------------------*/
+  #hero {
+    width: 100%;
+    height: 56vh;
+    background: url(../img/ayuvedic\ research.jpg) center center;
+    background-size: cover;
+    position: relative;
+  }
+
+  #hero:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+#hero .title h1{
+  position: relative;
+    font-size: 44px;
+    margin-top: 50px;
+}
+#hero h6{
+    position: relative;
+
+}

@@ -1,0 +1,369 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+<style>
+    .image_container {
+        position: relative;
+        width: 50%;
+    }
+
+    .document_image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: 0.5s ease;
+        backface-visibility: hidden;
+        padding: 1%;
+        margin: 1%;
+    }
+
+    .middle {
+        transition: 0.5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .image_container:hover .document_image {
+        opacity: 0.3;
+    }
+
+    .image_container:hover .middle {
+        opacity: 1;
+    }
+
+    .icon_small {
+        color: white;
+        display: block;
+        margin-top: 14px;
+        font-size: 11px;
+    }
+
+
+    @media only screen and (max-width: 900px) {
+        .user-information h5 {
+            font-size: 16px;
+        }
+
+        .user-information h6 {
+            font-size: 16px;
+        }
+
+        .user-information {
+            margin-left: 8px;
+        }
+    }
+</style>
+
+
+<!-- ======= Top Bar ======= -->
+
+
+<!-- ======= Header ======= -->
+<header id="header" style="height:105px;">
+    <div class="container">
+        <div class="logo float-left">
+            <a href="{% url 'main:home' %}" id='skip_id'><img src="{% static 'assets/img/white-logo (1).png' %}" alt=""
+                    class="img-fluid"></a>
+        </div>
+        <nav class="nav-menu float-right d-none d-lg-block ">
+            <ul class="">
+
+                <li class="" title='Notifications'>
+                    <a href="{% url 'main:home' %}" class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-bell"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                        </svg>
+                        <small class='icon_small'>Alerts</small>
+                    </a>
+
+                </li>
+                <li class="" title='All Members'>
+                    <a href="{% url 'main:all_members' %}" class=""> <i class="icofont-users-alt-4">
+
+                            <small class='icon_small'>Members</small>
+
+                        </i>
+                    </a>
+
+
+                </li>
+
+
+                <li class="" title='Web'>
+                    <a href="{% url 'main:web' %}" class=""> <i class="ri-dashboard-fill">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-globe" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z" />
+                            </svg>
+                            <small class='icon_small'>Web</small>
+
+                        </i></a>
+
+
+                </li>
+
+                <li class="" title='Logout'>
+
+                    <a href="{% url 'account:user_logout' %}" style="white-space: normal;
+                                                            word-wrap: break-word;"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                        </svg>
+                        <small class='icon_small'>Logout</small></a>
+
+                </li>
+
+
+
+
+
+            </ul>
+        </nav><!-- .nav-menu -->
+
+    </div>
+</header><!-- End Header -->
+
+
+
+
+
+
+
+
+
+
+<!--main Section-->
+<div id="main">
+    <section class="user-dashboard">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="user-box">
+                        <div class="userprofile-image">
+                            <img src="{{document.profile.url}}" alt="user-profile" class="img-fluid">
+
+                        </div>
+                        <div class="user-content mt-4 ">
+                            <h5 class="text-center">{{request.user.first_name|capfirst}}
+                                {{request.user.last_name|capfirst}}</h5>
+                            <p class="text-center">{{personal.address}}</p>
+                            <p class="text-center">Membership Type : {{request.user.membership.title}}</p>
+
+                        </div>
+
+                        <div class="social-links mt-3 d-flex justify-content-center align-items-center">
+
+                            <a {% if personal.facebook %} href="{{personal.facebook}}" {% else %} href='#' {% endif %}
+                                class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
+                            <a {% if personal.insta %} href="{{personal.insta}}" {% else %} href='#' {% endif %}
+                                class="instagram" target="_blank"><i class="bx bxl-instagram"></i></a>
+                            <a {% if personal.twitter %} href="{{personal.twitter}}" {% else %} href='#' {% endif %}
+                                class="twitter" target="_blank"><i class="bx bxl-twitter"></i></a>
+
+                        </div>
+                        <div style="margin: auto;position: relative;text-align: center;">
+                            {{ svg|safe }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-8">
+                    <div class="user-box">
+                        <div class="navigation-tab">
+                            <ul class="nav nav-pills d-flex justify-content-center align-items-center mb-3"
+                                id="pills-tab" role="tablist ">
+                                <li class="nav-item">
+                                    <a class="nav-link active" style="text-align:center;" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                                        role="tab" aria-controls="pills-home" aria-selected="true">Upgrade</a>
+                                </li>
+                          
+                            </ul>
+                            <hr>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+                                   
+                                    Membership Type:
+                                    <select class="custom-select custom-select-lg mb-3" id='membership_select'>
+                                        {% for member in memberships %}
+                                        {% if forloop.first %}
+                                        <option value="{{member.price}}" selected>{{member.title}}</option>
+                                        {% else %}
+                                        <option value="{{member.price}}">{{member.title}}</option>
+                                    
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    <div id='membership_charge'></div>
+                                    
+                                    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+                                    
+                                    <!-- Paypal Payments -->
+                                    <div id="paypal-button-container" style="text-align:center;"></div>
+                                    
+                                    <!-- Include the PayPal JavaScript SDK -->
+                                    <script
+                                        src="https://www.paypal.com/sdk/js?client-id=AWr6PYFo6mFg57COTT9uodwdOt3MfK_lpfdBUBGqaaZ0j0fSF-BZsdjfTaWHNbwiRzKLlxXPDEq95dmR&currency=USD"></script>
+                                    
+                                    <script>
+
+                                        // Charge Manager
+                                        var index = '0';
+                                        $("#membership_select").change(function () {
+                                            index = parseInt(document.getElementById('membership_select').value);
+                                            document.getElementById('membership_charge').innerHTML = String(index) + '$';
+                                        });
+
+
+                                        // Render the PayPal button into #paypal-button-container
+                                        paypal.Buttons({
+
+                                            // Set up the transaction
+                                            createOrder: function (data, actions) {
+                                                return actions.order.create({
+                                                    purchase_units: [{
+                                                        amount: {
+                                                            value: index
+                                                        }
+                                                    }]
+                                                });
+                                            },
+
+                                            // Finalize the transaction
+                                            onApprove: function (data, actions) {
+                                                return actions.order.capture().then(function (details) {
+                                                    // Show a success message to the buyer
+
+                                                    var URL = window.location.href + 'payment?value=' + index;
+                                                    var xhttp = new XMLHttpRequest();
+                                                    xhttp.onreadystatechange = function () {
+                                                        if (this.readyState == 4 && this.status == 200) {
+                                                            alert('Successfully Received the Payment');
+                                                            document.getElementById('skip_id').click();
+                                                        }
+                                                    };
+                                                    xhttp.open("GET", URL, true);
+                                                    xhttp.send();
+
+
+                                                });
+                                            }
+
+
+                                        }).render('#paypal-button-container');
+                                    </script>
+                                    <!-- Paypal Payments -->
+                                    <!-- Paypal Payments -->
+
+                                    
+                                    
+
+                                    </div>
+                                    </div>
+                                </div>
+                                <!--tab first end-->
+
+                               
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<!--Main div-->
+
+
+
+
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#front_image').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#back_image').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profile_image').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    $(document).ready(function () {
+
+
+
+
+
+
+
+        $("#front_button").click(function () {
+
+            document.getElementById('id_id_front').click();
+
+        })
+
+        $("#back_button").click(function () {
+
+            document.getElementById('id_id_back').click();
+
+        })
+
+        $("#profile_button").click(function () {
+
+            document.getElementById('id_profile').click();
+
+        })
+
+
+    });
+
+</script>
+
+{% endblock %}

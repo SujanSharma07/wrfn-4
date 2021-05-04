@@ -1,0 +1,66 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+<style>
+    .container {
+        width: fit-content;
+        border-radius: 25px;
+        border: 2px solid Black;
+        padding: 15px 15px 15px 15px;
+        margin: 20px 20px 20px 20px;
+        overflow: auto;
+        box-shadow: 5px 5px 2px #888888;
+        position: relative;
+    }
+
+    .x {
+        position: relative;
+        float: right;
+        background: red;
+        color: white;
+        top: -10px;
+        right: -10px;
+    }
+    
+</style>
+                                                <h3>{{gallery.title}}</h3>
+                                                <small><b>{{gallery.date}}</b></small>
+                                       <p>{{gallery.description|safe}}</p>
+
+
+{% for image in gallery.get_all %}
+
+<!--Image Hover effect and button-->
+
+<div class="container" id='container{{image.id}}'>
+    <button class="x" onClick='deleteimage({{image.id}});'>
+        X
+    </button>
+    <a href="{{image.image.url}}">
+    <img src="{{image.image.url}}" width="200" height="200">
+    </a>
+
+</div>
+
+
+{% endfor %}
+</div>
+</div>
+<script>
+    function deleteimage(id) {
+        URL = window.location.href + '/deleteimage/' + id;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", URL, true);
+        xhttp.send();
+        var item = "#container" + id;
+        $(item).remove();
+
+    }
+</script>
+
+{% endblock %}

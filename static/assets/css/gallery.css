@@ -1,0 +1,109 @@
+ /*--------------------------------------------------------------
+  # Gallery
+  --------------------------------------------------------------*/
+  .gallery .gallery-item {
+    overflow: hidden;
+    /* border-right: 3px solid #fff;
+    border-bottom: 3px solid #fff; */
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 29px 0 rgb(68 88 144 / 12%);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px;
+  }
+  /* .gallery-content{
+      padding:20px
+  }
+   */
+  .gallery .gallery-item img {
+    transition: all ease-in-out 0.4s;
+    /* width: 327px;
+    height: 208px; */
+  }
+  
+  .gallery .gallery-item:hover img {
+    transform: scale(1.1);
+  }
+  .gallery-content{
+    padding: 10px 18px;
+  }
+  .gallery-content h6{
+    font-size: 17px;
+    color: #5b71b4;
+    font-weight: 400;
+
+  }
+  /*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+    padding: 30px 0;
+  }
+  
+  .section-bg {
+    background-color: #f5f9fc;
+  }
+  
+  .section-title {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  
+  .section-title h2 {
+    font-size: 27px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+    color: #000;
+  }
+  
+  .section-title p {
+    margin-bottom: 0;
+  }
+
+
+  .blog-pagination {
+    color: #5db1f9;
+  }
+  
+  .blog-pagination ul {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+  }
+  
+   .blog-pagination li {
+    border: 1px solid white;
+    margin: 0 5px;
+    transition: 0.3s;
+  }
+  
+   .blog-pagination li.active {
+    background: white;
+  }
+  
+  .blog-pagination li a {
+    color: #aaaaaa;
+    padding: 7px 16px;
+    display: inline-block;
+  }
+  
+  .blog-pagination li.active,  .blog-pagination li:hover {
+    background: #0880e8;
+    border: 1px solid #0880e8;
+  }
+  
+   .blog-pagination li.active a, .blog-pagination li:hover a {
+    color: #fff;
+  }
+  
+  .blog-pagination li.disabled {
+    background: #fff;
+    border: 1px solid white;
+  }
+  
+  .blog-pagination li.disabled i {
+    color: #f1f1f1;
+    padding: 10px 16px;
+    display: inline-block;
+  }

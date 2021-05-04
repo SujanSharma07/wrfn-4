@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/base.css' %}" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="{% static 'assets/css/about.css" class=""> -->
+  <link rel="stylesheet" href="{% static 'assets/css/blog.css' %}" class="">
+
+
+  
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Blog-Details</a></li>
+        </ol>
+        <!-- <h2>Dolorum optio tempore voluptas dignissimos</h2> -->
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{{blog.get_one}}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="#">{{blog.title}}</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="#">{{blog.author}}</a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a
+                      href="#"><time datetime="2020-01-01">{{blog.date|date}}</time></a></li>
+                  <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="#">12
+                      Comments</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                  {{blog.highlight_line|safe}}
+                </p>
+
+                                <p>
+                  {{blog.content|safe}}
+                </p>
+
+                
+
+              </div>
+
+ 
+            </article><!-- End blog entry -->
+
+
+
+            <div class="blog-comments">
+              
+<div class="fb-share-button" data-href="http://127.0.0.1:8000/main/blogs/{{blog.id}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fmain%2Fblogs%2F%257B%257Bblog.id%257D%257D&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+              <div id="comment-4" class="comment clearfix">
+                  <!--Facebook comment plugin-->
+                  <div class="fb-comments" data-href="http://127.0.0.1:8000/main/blogs/{{blog.id}}" data-width="100%" data-numposts="5"></div>
+                  <!--Facebook comment plugin-->
+
+              </div><!-- End comment #4 -->
+
+
+            </div><!-- End blog comments -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+            <div class="sidebar">
+
+              <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form">
+                <form action="">
+                  <input type="text">
+                  <button type="submit"><i class="icofont-search"></i></button>
+                </form>
+
+              </div><!-- End sidebar search formn-->
+
+              <!-- <h3 class="sidebar-title">Categories</h3>
+                  <div class="sidebar-item categories">
+                    <ul>
+                      <li><a href="#">General <span>(25)</span></a></li>
+                      <li><a href="#">Lifestyle <span>(12)</span></a></li>
+                      <li><a href="#">Travel <span>(5)</span></a></li>
+                      <li><a href="#">Design <span>(22)</span></a></li>
+                      <li><a href="#">Creative <span>(8)</span></a></li>
+                      <li><a href="#">Educaion <span>(14)</span></a></li>
+                    </ul>
+    
+                  </div> -->
+              <!-- End sidebar categories-->
+
+              <h3 class="sidebar-title">Recent Posts</h3>
+              <div class="sidebar-item recent-posts">
+                {% for blog in blogs %}
+                <div class="post-item clearfix">
+                  <img src="{{blog.get_one}}" alt="">
+                  <h4><a href="{% url 'main:blog_detail' blog.id %}">{{blog.author}}</a></h4>
+                  <time datetime="2020-01-01">{{blog.date|date}}</time>
+                </div>
+                {% endfor %}
+
+
+              </div><!-- End sidebar recent posts-->
+
+              <h3 class="sidebar-title">Tags</h3>
+              <div class="sidebar-item tags">
+                <ul>
+                  <li><a href="#">Certificate</a></li>
+                  <li><a href="#">World Record list</a></li>
+                  <li><a href="#">Achievement</a></li>
+                  <li><a href="#">Annouchment</a></li>
+                  <li><a href="#">Memembership Card</a></li>
+                  <li><a href="#">Membership</a></li>
+                  <li><a href="#">World Record</a></li>
+                  <li><a href="#">New Record</a></li>
+                  <li><a href="#">Studio</a></li>
+                  <li><a href="#">Smart</a></li>
+                  <li><a href="#">Tips</a></li>
+                  <li><a href="#">Marketing</a></li>
+                </ul>
+
+              </div><!-- End sidebar tags-->
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+{% endblock %}

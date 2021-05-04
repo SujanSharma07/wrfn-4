@@ -1,0 +1,127 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% block body %}
+<style>
+    .card-container{
+        margin-top:8%;
+    }
+
+    @media only screen and (max-width: 541px) {
+        .card-container {
+                    margin-top:0;
+
+        }
+        .login-card {
+    margin-top: 46px;
+    }
+    .image-wrapper img {
+    width: 297px;
+    margin-top: 23px;
+    margin-left: 15px;
+    }
+    .form-group {
+    margin-bottom: 15px;
+    margin-right: 10%;
+}
+.pull-right{
+    float: right;
+    margin-right: 78px;
+}
+}
+
+
+
+@media only screen and (max-width: 321px) {
+
+    .image-wrapper img {
+    width: 284px;
+    margin-top: 23px;
+    margin-left: 3px;
+    }
+    
+    .form-group {
+     margin-bottom: 15px;
+    margin-right: 24%;
+}
+.text-center {
+    text-align: center;
+    margin-right: 91px;
+}
+h2 {
+    font-size: 21px;
+}
+.pull-right{
+    float: right;
+    margin-right: 68px;
+}
+login-form h2 {
+    /* margin: 0 0 15px; */
+    margin-left: 10px;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom:0px;
+}
+
+}
+</style>
+
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container card-container" >
+        <div class="card login-card">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="image-wrapper d-flex justify-content-center align-items-center">
+                        <img src="{% static 'assets/img/logo  main.png' %}" alt="login" class="login-card-img img-fluid">
+
+                    </div>
+
+                </div>
+                <div class="col-md-7">
+
+
+
+                    <div class="login-form">
+
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            <h2 class="text-center">Member Login</h2>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" class="form-control" name="email" placeholder="Email"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input type="password" class="form-control" name="password" placeholder="Password"
+                                        required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
+                            </div>
+                            <div class="clearfix">
+                                <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+                                <a href="{% url 'account:forgetpassword' %}" class="pull-right">Forgot Password?</a>
+                            </div>
+                            <!-- <div class="or-seperator"><i>or</i></div>
+                        <p class="text-center">Login with your social media account</p>
+                        <div class="text-center social-btn">
+                            <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+                            <a href="#" class="btn btn-info"><i class="fa fa-twitter"></i>&nbsp; Twitter</a>
+                            <a href="#" class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
+                        </div> -->
+                        </form>
+                        <p class="text-center text-muted small" style="font-size:120%;">Don't have an account? <a href="{% url 'account:signup' %}">Sign up here!</a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+</main>
+{% endblock %}

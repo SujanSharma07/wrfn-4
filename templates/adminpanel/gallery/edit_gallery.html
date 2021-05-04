@@ -1,0 +1,127 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+
+                            <h3 class="box-title">Edit Gallery {{gallery.title}}</h3>
+
+<form method="post" action='#'  enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-lg-12">
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Error!</h4>
+            <p>{{ form.errors }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    {{form}}
+    <div class="form-group row">
+        <label for="images" class="col-sm-2 col-form-label">Images</label>
+        <div class="col-sm-10">
+            <input type="file" class="form-control" onchange="readURL(this);" name='images' id='images' multiple>
+        </div>
+    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-save">Submit</button>
+                                
+                              
+                                <a type="submit" class="btn btn-primary  text-center" href="{% url 'adminpanel:home' %}">Cancel</button>
+                                
+                                </a>
+
+</form>
+<style>
+    .container {
+        width:fit-content;
+        border-radius: 25px;
+        padding: 15px 15px 15px 15px;
+        margin: 20px 20px 20px 20px;
+        overflow: auto;
+        box-shadow: 5px 5px 2px #888888;
+        position: relative;
+    }
+
+    .x {
+        position: relative;
+        float: right;
+        background: red;
+        color: white;
+        top: -10px;
+        right: -10px;
+    }
+    
+</style>
+{% for image in gallery.get_all %}
+
+<!--Image Hover effect and button-->
+
+<div class="container" id ='container{{image.id}}'>
+    <button class="x" onClick='deleteimage({{image.id}});'>
+        X
+    </button>
+    <img src="{{image.image.url}}" width="200" height="200">
+
+</div>
+
+
+{% endfor %}
+<div id="myDIV"></div>
+</div>
+</div>
+<script>
+    function deleteimage(id){
+        URL = window.location.href + '/deleteimage/' + id;
+        var xhttp = new XMLHttpRequest();    
+        xhttp.open("GET", URL, true);
+        xhttp.send();
+        var item = "#container" + id;
+        $(item).remove();
+
+    }
+</script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    /*
+        $(document).ready(function () {
+            $("#id_country").change(function () {
+                var obtions = document.getElementById('id_phone_0').innerHTML;
+              //  document.getElementById('id_phone_0').innerHTML = 'Afghanistan +93';//document.getElementById('id_country').value;
+            });
+        });
+    */
+
+    function readURL(input) {
+        $('.document_image').remove();
+
+        for (var i = 0; i < input.files.length; i++) {
+            if (input.files && input.files[i]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var x = document.createElement("IMG");
+                    x.setAttribute("src", e.target.result);
+                    x.setAttribute("width", "150");
+                    x.setAttribute("height", "150");
+                    x.setAttribute("style", "margin-left:2px; border:1px solid;border-radius: 25px;box - shadow: 5px 5px 2px #888888;");
+                    x.setAttribute("class", "document_image m-2");
+                    document.getElementById("myDIV").appendChild(x);
+                };
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        };
+
+    }
+
+
+
+</script>
+
+
+{% endblock %}

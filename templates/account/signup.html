@@ -1,0 +1,158 @@
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Sign Up{% endblock %}
+{% block body %}
+
+{% if request.user.is_authenticated %}
+{% if not request.user.is_verified %}
+<span>To verify yourself.. Please fill other details<a href="{% url 'main:home' %}">From Here</a></span>
+{% else %}
+<h1>You can not register again if you are logged in already <a href="{% url 'main:home' %}">Back</a></h1>
+{% endif %}
+{% else %}
+
+<style>
+    .card-container {
+        margin-top:4%;
+        background: #f8f1f1bf;
+        padding: 2%; 
+        width:30%;
+    }
+
+    @media only screen and (max-width: 900px) {
+        .card-container {
+            margin-top: 10%;
+    background: #f8f1f1bf;
+    padding: 2%;
+    width: 91%;
+
+        }
+
+    }
+</style>
+    
+
+
+    <div class="content content-fixed content-auth shadow-card rounded-lg" >
+
+<form method="post" action="#">
+    {% csrf_token %}
+    <!--
+
+    {{form}}
+    <button type="submit" class="btn btn-success">Sign Up</button>
+    -->
+
+        <div class="container card-container">
+            <div class="media align-items-stretch justify-content-center ht-100p">
+                <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
+                    <div class="pd-t-20 wd-100p">
+                        <h4 class="tx-color-01 mg-b-5" >Create New Account</h4>
+                        <p class="tx-color-03 tx-16 mg-b-40">It's free to signup and only takes a minute.</p>
+    
+                                <div class="row">
+
+                                <div class="col-lg-12">
+                                    {% if form.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <h4 class="alert-heading">Error!</h4>
+                                        <p>{{ form.errors }}</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                            <div class="col-lg-8">
+                                
+                                <div class="form-group">
+                                    {{ form.country|as_crispy_field }}
+                                </div>
+                                
+                            </div>
+                            <br>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    {{ form.first_name|as_crispy_field }}
+                                </div>
+                            </div>
+    
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    {{ form.last_name|as_crispy_field }}
+                                </div>
+                            </div>
+    
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    {{ form.username|as_crispy_field }}
+                                </div>
+                            </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.phone|as_crispy_field }}
+                                    </div>
+                                </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    {{ form.password1|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    {{ form.password2|as_crispy_field }}
+                                </div>
+                            </div>
+    
+    
+                       
+    
+                            <div class="col-lg-12">
+                                <div class="form-group tx-12">
+                                    By clicking <strong>Create an account</strong> below, you agree to our terms of service
+                                    and privacy statement.
+                                </div><!-- form-group -->
+                            </div>
+                            </div>
+    
+                        </div>
+    
+                    <center>   <button type="submit" class="btn btn-brand-02 btn-primary" >Create an account</button></center>
+                
+            </div><!-- media -->
+        </div><!-- container -->
+        </div>
+</form>
+    </div><!-- content -->
+
+{% endif %}
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript">
+
+//Auto select another obtion depending upon already selected obtion
+$(document).ready(function () {
+        $("#id_country").change(function () {
+        var country = document.getElementById('id_country');
+        var url = window.location.href + 'states/' + String(country.value).toLowerCase();
+        var request = new XMLHttpRequest();
+
+          var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var $option = $('select option:contains("' + this.responseText + '")').prop('selected', true);
+
+                }
+            };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+     
+
+        
+        });
+
+    });
+</script>        
+{% endblock %}

@@ -1,0 +1,1 @@
+KEY = 'uosdgi%f$r1k_@(munm6ny=@286pwpij=^k548*ilfu6in&04y'

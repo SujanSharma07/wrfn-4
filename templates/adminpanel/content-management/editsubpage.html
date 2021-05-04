@@ -1,0 +1,103 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <h3 class="box-title">Edit Sub page "{{sub.title}}"</h3>
+
+        <!-- Column -->
+        <form method="post" action="#" enctype="multipart/form-data">
+            {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Error!</h4>
+                <p>{{ form.errors }}</p>
+            </div>
+            {% endif %}
+            
+            <div id='pageselector'>
+
+            </div>
+
+
+
+            {% csrf_token %}
+            {{form|crispy}}
+            {{form.media}}
+            <button type="submit" class="btn btn-primary btn-save">Submit</button>
+
+        </form>
+        <div id="selectpage" style="display:none;">
+            Main Page:
+            <select class="form-control custom-select custom-select-lg mb-3" name='mainpageselect'>
+                {% for i in contents %}
+                {% if forloop.first %}
+                <option value="{{i.title}}">{{i.title}}</option>
+                {% else %}
+                <option value="{{i.title}}">{{i.title}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+
+
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+var selection = document.getElementById("selectpage").innerHTML;
+document.getElementById("pageselector").innerHTML = selection;
+
+    function subclicked(value) {
+        var selection = document.getElementById("selectpage").innerHTML;
+        if (value == 'sub') {
+            document.getElementById("pageselector").innerHTML = selection;
+        }
+        else {
+            document.getElementById("pageselector").innerHTML = '';
+
+        }
+    }
+
+    function c_delete(id) {
+        URL = window.location.href + "c_delete/" + String(id);
+        var banner_delete = "#content_" + String(id);
+        $(banner_delete).remove();
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", URL, true);
+        xhttp.send();
+    }
+</script>
+{% endblock %}

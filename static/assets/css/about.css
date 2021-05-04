@@ -1,0 +1,116 @@
+/*--------------------------------------------------------------
+  # Hero Section
+  --------------------------------------------------------------*/
+  #hero {
+    width: 100%;
+    height: 83vh;
+    background: url(../img/aboutus.jpg) center center;
+    background-size: cover;
+    position: relative;
+  }
+
+  #hero:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+#hero .title h1{
+    position: relative;
+    margin-top: 144px;
+    font-size: 67px;
+}
+#hero h6{
+    position: relative;
+
+}
+
+  
+  .section-titles h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    color: black;
+  }
+  
+  .section-titles h2::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #61bc46;
+    bottom: 0;
+    /* left: calc(50% - 25px); */
+  }
+  
+  .section-titles p {
+    margin-bottom: 0;
+  }
+  
+/*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+.about {
+    padding-top: 30px;
+  }
+  
+  .about .content p{
+    text-align: justify;
+    line-height: 28px;
+  }
+  .about .content h1{
+    color:#037c2d;
+    margin-bottom: 10px;
+    font-size: 21px;
+  }
+  
+  .content-box{
+    padding: 60px 30px 20px 30px;
+    color: white;
+  }
+  .content-box p{
+    color: white;
+    text-align: justify;
+    
+  }
+  .content-box ul li{
+    list-style: disc;
+    padding: 10px 0px;
+  }
+  
+  .section-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    text-align: center;
+    color: #000;
+  }
+  .section-title h2::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 73px;
+    height: 3px;
+    background: #61bc46;
+    bottom: 0;
+    left: calc(50% - 25px);
+  }
+  
+  .OurMission ul{
+    margin: 0;
+    padding: 0;
+}
+.OurMission ul li{
+    padding: 10px 5px;
+}
+    

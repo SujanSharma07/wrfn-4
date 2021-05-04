@@ -1,0 +1,59 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #444;
+}
+
+a {
+  color: #428bca;
+}
+
+a:hover {
+  color: #9eccf4;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6, .font-primary {
+  font-family: "Raleway", sans-serif;
+}
+
+#topbar {
+  background: #fff;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.contact-info a {
+  line-height: 1;
+  color: #444;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.contact-info a:hover {
+  color: #428bca;
+}
+
+.contact-info a i {
+  color: #428bca;
+  padding: 4px;
+}
+
+.icofont-phone {
+  padding-left: 20px;
+  margin-left: 10px;
+}
+
+.social-links a {
+  color: #5c768d;
+  padding: 4px 12px;
+  display: inline-block;
+  line-height: 1px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.social-links a:hover {
+  color: #428bca;
+}
+/*# sourceMappingURL=style.css.map */

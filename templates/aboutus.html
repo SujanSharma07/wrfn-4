@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{%  static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{%  static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{%  static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{%  static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{%  static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{%  static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{%  static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{%  static 'assets/css/base.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{%  static 'assets/css/about.css' %}" class="">
+        <link rel="shortcut icon" href="{% static 'images/icons/logo_png.png' %}">
+
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+        <div class="hero-container">
+            <div class="title pt-5 mt-5">
+                <h1 class="text-white text-center ">About Us</h1>
+            </div>
+
+        </div>
+    </section><!-- End Hero -->
+
+    <main id="main">
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about">
+            <div class="container">
+
+
+                <div class="section-title" style="opacity:1;" data-aos="zoom-out">
+                    <h2 class="">World Record Foundation</h2>
+                </div>
+
+                <div class="row content" style="opacity:1;" data-aos="fade-up">
+
+                    <div class="col-lg-6">
+
+                        <p>
+                         {{about.description1|safe}}
+                        </p>
+
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0">
+                        <p>{% if about.description2 %}
+                                                {{about.description2|safe}}
+                                                {% endif %}
+
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Section -->
+
+        <section class="OurMission" style='margin-top:30px;'>
+            <div class="container">
+                <div class="section-titles">
+                    <h2 class="">Our Mission And Vision </h2>
+                </div>
+                <ul class="">
+                    <li class="">Our vision is to unite world record holders globally.</li>
+                    <li class="">Our Mission is to give a platform to known & unknown world record holders.</li>
+                    <li class="">Our aim to unite world record holders globally</li>
+                    <li class="">Our vision is to unite world record holders globally.</li>
+                    <li class="">Our Mission is to give a platform to known & unknown world record holders.</li>
+                    <li class="">Our aim to unite world record holders globally</li>
+                </ul>
+
+            </div>
+            </div>
+        </section>
+
+
+
+
+
+    </main>
+
+
+{% endblock %}

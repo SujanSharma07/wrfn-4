@@ -1,0 +1,248 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% block body %}
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-12">
+                        <div class="white-box">
+                            <div class="user-bg"> <img width="100%" alt="user" src="{% static 'plugins/images/large/img1.jpg' %}">
+                                <div class="overlay-box">
+                                    <div class="user-content">
+                                        <a href="javascript:void(0)"><img src="{{document.profile.url}}"
+                                                class="thumb-lg img-circle" alt="img"></a>
+                                        <h4 class="text-white mt-2">{{request.user.first_name|capfirst}} {{request.user.last_name|capfirst}}</h4>
+                                        <h5 class="text-white mt-2">{{request.user.username}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-btm-box mt-5 d-md-flex">
+                                <div class="col-md-12 col-sm-12 text-center">
+                                    <h4>{{personal.tag_line}}</h4>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-8 col-xlg-9 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <div class="col-lg-12">
+                                    {% if form.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <h4 class="alert-heading">Error!</h4>
+                                        <p>{{ form.errors }}</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <form class="form-horizontal form-material" action="{% url 'adminpanel:updatepersonal' %}" method="post">
+                                                                {% csrf_token %}
+
+                                    {{form}}
+                                        <div class="submit-form d-flex justify-content-center align-items-center">
+                                            <button type="submit" class="btn btn-primary btn-save">Update</button>
+
+                                        </div>                               
+                                     </form>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <style>
+                                    #id_id_front,
+                                    #id_id_back,
+                                    #id_profile {
+                                        display: none;
+                                    }
+                                </style>
+                                <form method="post" action="{% url 'adminpanel:updatedocuments' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            {% if form1.errors %}
+                                            <div class="alert alert-danger" role="alert">
+                                                <h4 class="alert-heading">Error!</h4>
+                                                <p>{{ form1.errors }}</p>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <!--  {widget}<img class="country-select-flag" id="N" style="margin: 6px 4px 0" src="{country.flag}">
+                                                                                    -->
+                                
+                                
+                                        <div class="image_container">
+                                
+                                            <img src="{{form1.initial.id_front.url}}" id='front_image' class='document_image' height='40%' width='27%'>
+                                            <div class="middle">
+                                                <center>Front Side of Document</center>
+                                                <a class="btn btn-success" id='front_button'>Change</a>
+                                            </div>
+                                            {{form1.id_front}}
+                                
+                                        </div>
+                                
+                                        <div class="image_container">
+                                
+                                            <img src="{{form1.initial.id_back.url}}" id='back_image' class='document_image' height='40%' width='27%'>
+                                            <div class="middle">
+                                                <center>Back Side of Document</center>
+                                
+                                                <a class="btn btn-success" id='back_button'>Change</a>
+                                            </div>
+                                            {{form1.id_back}}
+                                
+                                        </div>
+                                        <div class="image_container">
+                                
+                                            <img src="{{form1.initial.profile.url}}" id='profile_image' class='document_image' height='40%' width='27%'>
+                                            <div class="middle">
+                                                <center>Latest Profile</center>
+                                
+                                                <a class="btn btn-success" id='profile_button'>Change</a>
+                                            </div>
+                                            {{form1.profile}}
+                                
+                                        </div>
+                                
+                                
+                                
+                                    </div>
+                                
+                                    <div class="submit-form d-flex justify-content-center align-items-center">
+                                        <button type="submit" class="btn btn-primary btn-save">Update</button>
+                                
+                                    </div>
+                                
+                                </form>
+                                <!--Update Documents-->
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <div class="col-lg-12">
+                                    {% if form2.errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <h4 class="alert-heading">Error!</h4>
+                                        <p>{{ form2.errors }}</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <form class="form-horizontal form-material" action="{% url 'adminpanel:updateskills' %}" method="post">
+                                    {% csrf_token %}
+                                    {{form2}}
+                                    <div class="submit-form d-flex justify-content-center align-items-center">
+                                        <button type="submit" class="btn btn-primary btn-save">Update</button>
+
+                                    </div>                               
+
+</form>
+                            </div>
+                        </div>
+                    </div>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#front_image').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#back_image').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#profile_image').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    $(document).ready(function () {
+
+
+
+
+
+
+
+        $("#front_button").click(function () {
+
+            document.getElementById('id_id_front').click();
+
+        })
+
+        $("#back_button").click(function () {
+
+            document.getElementById('id_id_back').click();
+
+        })
+
+        $("#profile_button").click(function () {
+
+            document.getElementById('id_profile').click();
+
+        })
+
+
+    });
+
+</script>
+
+                       
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+{% endblock %}

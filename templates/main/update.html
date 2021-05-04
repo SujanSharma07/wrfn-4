@@ -1,0 +1,367 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<style>
+    .documents_{
+        display: none;
+    }
+</style>
+<div class="row">
+
+    <div class="col-4">
+                <div class='side_block' style='background-color:lightblue;border-radius: 15%'>
+                    <div class="flex flex-col items-center py-7 px-2">
+                        <div class="rounded-full h-proPic w-proPic shadow-card overflow-hidden">
+                            {% if document %}
+                            <img src='{{document.profile.url}}' style="width:200px; height: 200px;border-radius: 50%;">
+                            {% endif %}
+                        </div>
+                        <div class="flex justify-center space-x-1 mt-3 w-full"><span
+                                class="text-19 font-medium text-center">{{request.user.first_name|capfirst}}{{request.user.last_name|capfirst}}
+                            </span></div>
+                        <p class="text-primary font-medium">{{request.user.country|capfirst}}</p>
+                        <div class="mt-7 mb-5"><a class="text-white btn btn-primary" href="{% url 'main:update' %}">Edit
+                                Profile</a>
+                        </div>
+                        <div class="w-full px-7 mt-4">
+                            <div
+                                style="border: 0.8px solid rgb(14, 124, 148); height: 21px; width: 100%; background-color: rgb(224, 224, 222); border-radius: 9px;">
+                                <div
+                                    style="height: 100%; width: 86%; background-color: rgb(0, 255, 0); border-radius: inherit; text-align: right; transition: width 1s ease-in-out 0s, background-color 1s ease-in-out 0s;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <p>Membership Status: {% if request.user.is_verified %}Completed{% else %}Incomplete{% endif %}
+                            </p>
+                        </div>
+                        <div class="mt-6"><a class="btn btn-danger text-white rounded-sm "
+                                href="{% url 'account:user_logout' %}">Logout</a>
+                        </div>
+                        <div class="my-">
+                            <p class="text-warn text-center"></p>
+                        </div>
+                    </div>
+                </div>
+
+    
+    </div>
+    <div class="col-8" >
+
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                    aria-controls="pills-home" aria-selected="true"><button class="px-4 py-2 rounded-lg max-w-tab">
+                        <div class="flex justify-center items-center undefined"><svg width="14" height="28" viewBox="0 0 14 28" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.3311 20.5163C13.1371 20.3905 12.9013 20.3466 12.6751 20.3941C12.4488 20.4417 12.2506 20.5768 12.1237 20.77C10.8901 22.6598 8.62416 24.9782 6.60317 25.7569C4.58218 26.5355 2.99863 26.2556 2.36872 25.7569C2.0975 25.5207 1.38884 24.882 1.99251 22.7035C2.39496 21.2512 4.89714 14.4096 5.49207 12.7473L3.58481 12.9923C2.98114 14.6196 0.706429 20.7263 0.295232 22.2486C-0.299692 24.4271 -0.00223003 26.0106 1.24886 27.113C2.12302 27.7263 3.17388 28.0366 4.24098 27.9966C5.2764 27.9817 6.29998 27.774 7.25934 27.3842C9.70028 26.4306 12.2637 23.7796 13.611 21.7237C13.6721 21.6261 13.7133 21.5174 13.7323 21.4038C13.7513 21.2902 13.7477 21.174 13.7217 21.0619C13.6957 20.9497 13.6478 20.8438 13.5808 20.7502C13.5137 20.6565 13.4289 20.5771 13.3311 20.5163Z"
+                                    fill="#0E7C94"></path>
+                                <path
+                                    d="M13.3311 20.5163C13.1371 20.3905 12.9013 20.3466 12.6751 20.3941C12.4488 20.4417 12.2506 20.5768 12.1237 20.77C10.8901 22.6598 8.62416 24.9782 6.60317 25.7569C4.58218 26.5355 2.99863 26.2556 2.36872 25.7569C2.0975 25.5207 1.38884 24.882 1.99251 22.7035C2.39496 21.2512 4.89714 14.4096 5.49207 12.7473L3.58481 12.9923C2.98114 14.6196 0.706429 20.7263 0.295232 22.2486C-0.299692 24.4271 -0.00223003 26.0106 1.24886 27.113C2.12302 27.7263 3.17388 28.0366 4.24098 27.9966C5.2764 27.9817 6.29998 27.774 7.25934 27.3842C9.70028 26.4306 12.2637 23.7796 13.611 21.7237C13.6721 21.6261 13.7133 21.5174 13.7323 21.4038C13.7513 21.2902 13.7477 21.174 13.7217 21.0619C13.6957 20.9497 13.6478 20.8438 13.5808 20.7502C13.5137 20.6565 13.4289 20.5771 13.3311 20.5163Z"
+                                    fill="#0E7C94"></path>
+                                <path
+                                    d="M8.003 7.87399C8.78166 7.87399 9.54284 7.64309 10.1903 7.21049C10.8377 6.77789 11.3423 6.16301 11.6403 5.44362C11.9383 4.72423 12.0163 3.93263 11.8643 3.16893C11.7124 2.40522 11.3375 1.70372 10.7869 1.15312C10.2363 0.602522 9.53477 0.22756 8.77107 0.07565C8.00736 -0.0762598 7.21577 0.00170582 6.49637 0.299688C5.77698 0.597669 5.16211 1.10228 4.72951 1.74972C4.2969 2.39715 4.066 3.15833 4.066 3.937C4.066 4.98115 4.48079 5.98254 5.21912 6.72087C5.95745 7.4592 6.95884 7.87399 8.003 7.87399ZM8.003 1.74978C8.43559 1.74978 8.85846 1.87806 9.21815 2.11839C9.57784 2.35873 9.85818 2.70032 10.0237 3.09998C10.1893 3.49965 10.2326 3.93942 10.1482 4.3637C10.0638 4.78798 9.85548 5.17771 9.54959 5.48359C9.24371 5.78948 8.85398 5.9978 8.4297 6.08219C8.00542 6.16658 7.56565 6.12327 7.16598 5.95772C6.76632 5.79218 6.42473 5.51184 6.18439 5.15215C5.94406 4.79246 5.81578 4.36959 5.81578 3.937C5.81578 3.35691 6.04622 2.80058 6.4564 2.3904C6.86658 1.98022 7.42291 1.74978 8.003 1.74978Z"
+                                    fill="#0E7C94"></path>
+                                <path
+                                    d="M8.003 7.87399C8.78166 7.87399 9.54284 7.64309 10.1903 7.21049C10.8377 6.77789 11.3423 6.16301 11.6403 5.44362C11.9383 4.72423 12.0163 3.93263 11.8643 3.16893C11.7124 2.40522 11.3375 1.70372 10.7869 1.15312C10.2363 0.602522 9.53477 0.22756 8.77107 0.07565C8.00736 -0.0762598 7.21577 0.00170582 6.49637 0.299688C5.77698 0.597669 5.16211 1.10228 4.72951 1.74972C4.2969 2.39715 4.066 3.15833 4.066 3.937C4.066 4.98115 4.48079 5.98254 5.21912 6.72087C5.95745 7.4592 6.95884 7.87399 8.003 7.87399ZM8.003 1.74978C8.43559 1.74978 8.85846 1.87806 9.21815 2.11839C9.57784 2.35873 9.85818 2.70032 10.0237 3.09998C10.1893 3.49965 10.2326 3.93942 10.1482 4.3637C10.0638 4.78798 9.85548 5.17771 9.54959 5.48359C9.24371 5.78948 8.85398 5.9978 8.4297 6.08219C8.00542 6.16658 7.56565 6.12327 7.16598 5.95772C6.76632 5.79218 6.42473 5.51184 6.18439 5.15215C5.94406 4.79246 5.81578 4.36959 5.81578 3.937C5.81578 3.35691 6.04622 2.80058 6.4564 2.3904C6.86658 1.98022 7.42291 1.74978 8.003 1.74978Z"
+                                    fill="#0E7C94"></path>
+                                <path
+                                    d="M1.45011 11.3735C1.5026 11.3735 6.93565 10.6561 8.21299 10.4986C8.78167 10.4111 9.21036 10.4986 9.35034 10.6299C9.49033 10.7611 9.53407 11.3298 9.2891 12.0997C8.75542 13.727 6.06077 21.7234 5.27337 24.0944C5.65823 24.0154 6.03577 23.9042 6.40197 23.7619C6.75222 23.6171 7.08892 23.4414 7.40809 23.237C8.48421 20.1224 10.4964 14.0857 10.9514 12.7033C11.4063 11.321 11.2926 10.2711 10.6889 9.55374C10.3445 9.20458 9.91348 8.9533 9.43995 8.8257C8.96642 8.69809 8.46746 8.69874 7.99427 8.82758C6.74318 8.95882 1.45886 9.64998 1.23139 9.70247C0.999352 9.73264 0.788804 9.85374 0.64606 10.0391C0.503316 10.2245 0.440069 10.4591 0.470234 10.6911C0.500398 10.9231 0.621503 11.1337 0.806906 11.2764C0.992308 11.4192 1.22682 11.4824 1.45886 11.4522L1.45011 11.3735Z"
+                                    fill="#0E7C94""></path>
+                                <path
+                                    d="M1.45011 11.3735C1.5026 11.3735 6.93565 10.6561 8.21299 10.4986C8.78167 10.4111 9.21036 10.4986 9.35034 10.6299C9.49033 10.7611 9.53407 11.3298 9.2891 12.0997C8.75542 13.727 6.06077 21.7234 5.27337 24.0944C5.65823 24.0154 6.03577 23.9042 6.40197 23.7619C6.75222 23.6171 7.08892 23.4414 7.40809 23.237C8.48421 20.1224 10.4964 14.0857 10.9514 12.7033C11.4063 11.321 11.2926 10.2711 10.6889 9.55374C10.3445 9.20458 9.91348 8.9533 9.43995 8.8257C8.96642 8.69809 8.46746 8.69874 7.99427 8.82758C6.74318 8.95882 1.45886 9.64998 1.23139 9.70247C0.999352 9.73264 0.788804 9.85374 0.64606 10.0391C0.503316 10.2245 0.440069 10.4591 0.470234 10.6911C0.500398 10.9231 0.621503 11.1337 0.806906 11.2764C0.992308 11.4192 1.22682 11.4824 1.45886 11.4522L1.45011 11.3735Z"
+                                    fill="#0E7C94"></path>
+                            </svg></div>
+                        <div class="hidden sm:block font-medium text-sm font-serif mt-2">Personal Information</div>
+                    
+                    </button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                    aria-controls="pills-profile" aria-selected="false"><button class="px-4 py-2 rounded-lg max-w-tab focus:outline-none bg-grey">
+                        <div class="flex justify-center items-center undefined"><svg width="28" height="22" viewBox="0 0 28 22" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M25.6667 0H2.33333C1.04514 0 0 1.0558 0 2.35714V3.14286H28V2.35714C28 1.0558 26.9549 0 25.6667 0ZM0 19.6429C0 20.9442 1.04514 22 2.33333 22H25.6667C26.9549 22 28 20.9442 28 19.6429V4.71429H0V19.6429ZM17.1111 8.25C17.1111 8.03393 17.2861 7.85714 17.5 7.85714H24.5C24.7139 7.85714 24.8889 8.03393 24.8889 8.25V9.03571C24.8889 9.25179 24.7139 9.42857 24.5 9.42857H17.5C17.2861 9.42857 17.1111 9.25179 17.1111 9.03571V8.25ZM17.1111 11.3929C17.1111 11.1768 17.2861 11 17.5 11H24.5C24.7139 11 24.8889 11.1768 24.8889 11.3929V12.1786C24.8889 12.3946 24.7139 12.5714 24.5 12.5714H17.5C17.2861 12.5714 17.1111 12.3946 17.1111 12.1786V11.3929ZM17.1111 14.5357C17.1111 14.3196 17.2861 14.1429 17.5 14.1429H24.5C24.7139 14.1429 24.8889 14.3196 24.8889 14.5357V15.3214C24.8889 15.5375 24.7139 15.7143 24.5 15.7143H17.5C17.2861 15.7143 17.1111 15.5375 17.1111 15.3214V14.5357ZM8.55556 7.85714C10.2715 7.85714 11.6667 9.26652 11.6667 11C11.6667 12.7335 10.2715 14.1429 8.55556 14.1429C6.83958 14.1429 5.44444 12.7335 5.44444 11C5.44444 9.26652 6.83958 7.85714 8.55556 7.85714ZM3.26181 17.8848C3.67014 16.6228 4.84167 15.7143 6.22222 15.7143H6.62083C7.21875 15.9647 7.87014 16.1071 8.55556 16.1071C9.24097 16.1071 9.89722 15.9647 10.4903 15.7143H10.8889C12.2694 15.7143 13.441 16.6228 13.8493 17.8848C14.0049 18.371 13.5965 18.8571 13.091 18.8571H4.02014C3.51458 18.8571 3.10625 18.3661 3.26181 17.8848Z"
+                                    fill="#0E7C94" fill-opacity="1"></path>
+                            </svg></div>
+                        <div class="hidden sm:block font-medium text-sm font-serif text-black mt-2">Upload Document</div>
+                        <div></div>
+                    </button></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                    aria-controls="pills-contact" aria-selected="false"><button class="px-4 py-2 rounded-lg max-w-tab focus:outline-none bg-grey">
+                        <div class="flex justify-center items-center undefined"><svg width="27" height="28" viewBox="0 0 27 28" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11.3684 0L21.7393 3.192C22.0285 3.28096 22.2813 3.45867 22.4608 3.6992C22.6402 3.93973 22.737 4.23048 22.7368 4.529V7H25.5789C25.9558 7 26.3173 7.1475 26.5838 7.41005C26.8503 7.6726 27 8.0287 27 8.4V11.2H8.52632V8.4C8.52632 8.0287 8.67603 7.6726 8.94253 7.41005C9.20903 7.1475 9.57048 7 9.94737 7H19.8947V5.558L11.3684 2.9316L2.84211 5.558V15.9236C2.8419 16.7807 3.04141 17.6264 3.42525 18.3956C3.8091 19.1648 4.36705 19.8369 5.05611 20.3602L5.32468 20.5506L11.3684 24.612L16.7428 21H9.94737C9.57048 21 9.20903 20.8525 8.94253 20.59C8.67603 20.3274 8.52632 19.9713 8.52632 19.6V14H27V19.6C27 19.9713 26.8503 20.3274 26.5838 20.59C26.3173 20.8525 25.9558 21 25.5789 21L21.0032 21.0014C20.4532 21.7154 19.7853 22.3454 19.0137 22.8634L11.3684 28L3.72316 22.8648C2.57569 22.094 1.6367 21.0588 0.98783 19.8491C0.338961 18.6394 -0.000143843 17.2918 4.57719e-08 15.9236V4.529C0.000171388 4.23072 0.0970389 3.94029 0.276483 3.70004C0.455927 3.45979 0.708568 3.28229 0.997579 3.1934L11.3684 0Z"
+                                    fill="#0E7C94" fill-opacity="1"></path>
+                            </svg></div>
+                        <div class="hidden sm:block font-medium text-sm font-serif text-black mt-2">Make Payment</div>
+                        <div></div>
+                    </button></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="pills-skill-tab" data-toggle="pill" href="#pills-skill" role="tab"
+                    aria-controls="pills-contact" aria-selected="false"><button class="px-4 py-2 rounded-lg max-w-tab focus:outline-none bg-grey">
+                        <div class="flex justify-center items-center undefined"><svg width="27" height="27" viewBox="0 0 27 27" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M2.60014 1.39242H23.4155V13.57C24.1452 13.1655 24.5371 12.8898 24.8056 12.7132V0.695355C24.8054 0.510872 24.732 0.334008 24.6014 0.203623C24.4709 0.0732385 24.294 -8.95351e-08 24.1095 0H1.9041C1.51905 0 1.20703 0.312018 1.20703 0.695355V12.7441C1.47139 12.9107 1.85095 13.1901 2.60014 13.6081V1.39242Z"
+                                    fill="#0E7C94"></path>
+                                <path
+                                    d="M26.0025 12.5074C25.8232 12.3644 25.5749 12.3651 25.181 12.5074C25.0661 12.5492 24.9499 12.6188 24.8055 12.7131C24.537 12.8897 24.1455 13.1653 23.4155 13.5699C23.1902 13.6934 22.9447 13.8264 22.6471 13.9756C22.5538 14.0222 22.464 14.0603 22.3718 14.1048C20.6941 14.8948 19.1851 15.1486 19.1851 15.1486H14.1876C14.093 15.1486 13.7899 15.2068 13.6445 15.4259C13.5012 15.6447 13.5252 16.0054 13.5252 16.0054V16.6144C13.7055 16.7422 13.8962 16.8568 14.1064 16.9291C15.613 17.4427 16.6323 16.9949 17.0771 16.3709C17.5972 15.6392 17.8619 15.2295 18.4331 15.4434C19.0044 15.6574 18.4331 17.0481 17.72 17.7623C17.0051 18.4769 16.1482 19.0478 14.9358 19.0478C14.4263 19.0478 13.9325 18.9713 13.5252 18.8845V24.0726C13.5252 25.5367 15.0812 26.3191 16.1509 26.3191C17.2204 26.3191 19.3627 25.7129 20.3982 23.1431C21.4326 20.5739 20.3279 17.1835 20.3279 17.1835C20.3279 17.1835 22.0039 16.4323 23.7536 15.3272C25.5015 14.2214 25.9668 13.1856 26.0025 13.0402C26.0368 12.8938 26.1794 12.6507 26.0025 12.5074Z"
+                                    fill="#0E7C94"></path>
+                                <path
+                                    d="M17.7199 17.7623C18.4331 17.0481 19.0043 15.6574 18.4331 15.4434C17.8619 15.2295 17.5972 15.6392 17.077 16.3709C16.6323 16.9949 15.613 17.4427 14.1063 16.9291C13.8962 16.8568 13.7055 16.7422 13.5252 16.6143C12.7811 16.0853 12.2747 15.2295 11.902 15.2295H6.90456C6.90456 15.2295 5.51831 14.9949 3.92701 14.2811C3.76723 14.2091 3.60642 14.1377 3.44321 14.0558C3.1587 13.9131 2.87758 13.7638 2.60008 13.608C1.85089 13.19 1.47133 12.9109 1.20697 12.7439C1.09691 12.6743 1.00364 12.6222 0.908324 12.5879C0.516072 12.4453 0.266115 12.4453 0.0874758 12.5879C-0.0901345 12.7313 0.0518166 12.9747 0.0874758 13.1204C0.114906 13.2319 0.400523 13.8693 1.32046 14.6599C1.64132 14.9325 1.98079 15.1824 2.33641 15.4078C4.08439 16.5142 5.76209 17.2634 5.76209 17.2634C5.76209 17.2634 4.65563 20.6531 5.6918 23.223C6.72661 25.7925 8.86787 26.4014 9.93833 26.4014C11.0091 26.4014 12.5651 25.6138 12.5651 24.1508V18.6198C12.5651 18.6198 12.9601 18.7638 13.5248 18.8842C13.9322 18.9709 14.4259 19.0474 14.9354 19.0474C16.1482 19.0477 17.005 18.4768 17.7199 17.7623Z"
+                                    fill="#0E7C94"></path>
+                                <path
+                                    d="M16.8223 7.84521C15.9987 7.84531 15.2089 8.1725 14.6264 8.75486C14.044 9.33721 13.7167 10.127 13.7166 10.9507C13.7166 12.6647 15.1069 14.0557 16.8223 14.0557C18.536 14.0557 19.9261 12.6647 19.9261 10.9507C19.9261 9.23627 18.536 7.84521 16.8223 7.84521Z"
+                                    fill="#0E7C94"></path>
+                                <path
+                                    d="M9.45954 7.84521C7.74515 7.84521 6.35547 9.23627 6.35547 10.9507C6.35547 12.6647 7.74481 14.0557 9.45954 14.0557C11.1749 14.0557 12.5653 12.6647 12.5653 10.9507C12.5653 9.23627 11.1749 7.84521 9.45954 7.84521Z"
+                                    fill="#0E7C94"></path>
+                            </svg></div>
+                        <div class="hidden sm:block font-medium text-sm font-serif text mt-2">Skills &amp; Expertise</div>
+                        <div></div>
+                    </button></a>
+            </li>
+
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="content content-fixed content-auth">
+                <div class="container">
+                    <form method="post" action="{% url 'main:updatepersonal' %}">
+                        {% csrf_token %}
+                        <div class="media align-items-stretch justify-content-center ht-100p">
+                            <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
+                                <div class="pd-t-20 wd-100p">
+                                    <h4 class="tx-color-01 mg-b-5">Update Account</h4>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            {% if form.errors %}
+                                            <div class="alert alert-danger" role="alert">
+                                                <h4 class="alert-heading">Error!</h4>
+                                                <p>{{ form.errors }}</p>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <!--  {widget}<img class="country-select-flag" id="N" style="margin: 6px 4px 0" src="{country.flag}">
+            -->
+                                        {{form}}
+            
+                                    </div>
+            
+                                                                                            <input type="submit" class="btn btn-brand-02 btn-block mt-3  btn-primary" value="Save">
+
+                                </div>
+                            </div><!-- sign-wrapper -->
+                        </div><!-- media -->
+                    </form>
+            
+                </div><!-- container -->
+            </div><!-- content -->
+        </div><!--Personal Info-->
+
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+<div class="content content-fixed content-auth">
+    <div class="container">
+                    <form method="post" action="{% url 'main:updatedocuments' %}"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="media align-items-stretch justify-content-center ht-100p">
+                <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
+                    <div class="pd-t-20 wd-100p">
+                        <h4 class="tx-color-01 mg-b-5">Update Account</h4>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {% if form1.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    <h4 class="alert-heading">Error!</h4>
+                                    <p>{{ form1.errors }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <!--  {widget}<img class="country-select-flag" id="N" style="margin: 6px 4px 0" src="{country.flag}">
+            -->                 
+
+
+
+            <div class="image_container">
+                <img src="{{form1.initial.id_front.url}}" id='front_image' class='document_image' height='40%' width='27%'>
+                <div class="middle">
+                    <center>Front Side of Document</center>
+                    <a class="btn btn-success" id='front_button'>Change</a>
+                    </div>
+                                                        {{form1.id_front}}
+    
+            </div>
+
+                <div class="image_container">
+               
+                    <img src="{{form1.initial.id_back.url}}"  id='back_image' class='document_image' height='40%' width='27%'>
+                    <div class="middle">
+                                            <center>Back Side of Document</center>
+
+                        <a class="btn btn-success" id='back_button'>Change</a>
+                    </div>
+                    {{form1.id_back}}
+                
+                </div>
+                    <div class="image_container">
+                   
+                        <img src="{{form1.initial.profile.url}}" id='profile_image' class='document_image' height='40%' width='27%'>
+                        <div class="middle">
+                                                <center>Latest Profile</center>
+
+                            <a class="btn btn-success" id='profile_button'>Change</a>
+                        </div>
+                                        {{form1.profile}}
+                    
+                    </div>
+
+
+                         
+                        </div>
+
+                                                                                    <input type="submit" class="btn btn-brand-02 btn-block mt-3  btn-primary" value="Save">
+
+                    </div>
+                </div><!-- sign-wrapper -->
+            </div><!-- media -->
+        </form>
+
+    </div><!-- container -->
+</div><!-- content -->
+            </div><!--Documents-->
+
+
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">........
+
+            </div><!--payment-->
+
+                        <div class="tab-pane fade" id="pills-skill" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                    <div class="content content-fixed content-auth">
+                                        <div class="container">
+                                    
+                                            <form method="post" action="{% url 'main:updateskills' %}">
+                                                {% csrf_token %}
+                                                <div class="media align-items-stretch justify-content-center ht-100p">
+                                                    <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
+                                                        <div class="pd-t-20 wd-100p">
+                                                            <h4 class="tx-color-01 mg-b-5">Update Account</h4>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    {% if form2.errors %}
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                        <h4 class="alert-heading">Error!</h4>
+                                                                        <p>{{ form2.errors }}</p>
+                                                                    </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                                <!--  {widget}<img class="country-select-flag" id="N" style="margin: 6px 4px 0" src="{country.flag}">
+                                                                    -->
+                                                                {{form2}}
+                                    
+                                                            </div>
+                                    
+                                                            <input type="submit" class="btn btn-brand-02 btn-block mt-3  btn-primary" value="Save">
+                                                        </div>
+                                                    </div><!-- sign-wrapper -->
+                                                </div><!-- media -->
+                                            </form>
+                                    
+                                    
+                                        </div><!-- container -->
+                                    </div><!-- content -->
+
+                        </div><!--skills and experties-->
+
+        </div>
+</div>
+ 
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+/*
+    $(document).ready(function () {
+        $("#id_country").change(function () {
+            var obtions = document.getElementById('id_phone_0').innerHTML;
+          //  document.getElementById('id_phone_0').innerHTML = 'Afghanistan +93';//document.getElementById('id_country').value;
+        });
+    });
+*/
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#front_image').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+                function readURL1(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                $('#back_image').attr('src', e.target.result);
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+
+                            function readURL2(input) {
+                                    if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
+
+                                        reader.onload = function (e) {
+                                            $('#profile_image').attr('src', e.target.result);
+                                        };
+
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                }
+
+
+$(document).ready(function () {
+
+
+
+
+
+
+
+            $("#front_button").click(function () {
+
+                document.getElementById('id_id_front').click();
+
+            })
+
+            $("#back_button").click(function () {
+
+        document.getElementById('id_id_back').click();
+
+        })
+
+    $("#profile_button").click(function () {
+
+        document.getElementById('id_profile').click();
+
+    })
+
+
+});
+
+</script>
+{% endblock %}

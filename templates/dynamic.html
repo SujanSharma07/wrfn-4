@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<style>
+    #hero {
+    width: 100%;
+    height: 56vh;
+    background: url('{{content.background_image.url}}');
+    background-size: cover;
+    position: relative;
+}
+</style>
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div class="hero-container">
+        <div class="title pt-5 mt-5">
+            <h1 class="text-white text-center ">{{content.title}}</h1>
+        </div>
+
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container">
+
+
+            <div class="section-title" data-aos="zoom-out">
+                <h2 class="">{{content.content_heading|safe}}</h2>
+            </div>
+
+            <div class="row content" data-aos="fade-up">
+
+                {{content.content|safe}}
+
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+    <!-- 
+    <section class="OurMission">
+        <div class="container">
+          <div class="section-titles">
+            <h2 class="">Memory training Includes </h2>
+            </div>
+            <ul class="">
+              <li class="">Our vision is to unite world record holders globally.</li>
+              <li class="">Our Mission is to give a platform to known & unknown world record holders.</li>
+              <li class="">Our aim to unite world record holders globally</li>
+              <li class="">Our vision is to unite world record holders globally.</li>
+              <li class="">Our Mission is to give a platform to known & unknown world record holders.</li>
+              <li class="">Our aim to unite world record holders globally</li>
+            </ul>
+  
+          </div>
+        </div>
+      </section> -->
+
+
+
+
+
+
+
+</main>
+
+
+{% endblock %}

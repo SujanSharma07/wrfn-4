@@ -1,0 +1,324 @@
+{% extends 'base.html' %}
+    {% load static %}
+{% block body %}
+    <!-- ======= Hero Section ======= -->
+<!-- ======= Hero Section ======= -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+      <div class="hero-container">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+    
+          <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+    
+          <div class="carousel-inner" role="listbox">
+            
+
+              <div class="carousel-inner" role="listbox">
+              
+                <!-- Slide 2 -->
+              
+              
+              
+                <!-- Slide 3 -->
+                {% for banner in banners %}
+                {% if forloop.first %}
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url('{{banner.image.url}}');">
+                  <div class="carousel-container">
+                
+                  </div>
+                </div>
+
+                
+                {% else %}
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url('{{banner.image.url}}');">
+                  <div class="carousel-container">
+                
+                  </div>
+                </div>
+                
+                {% endif %}
+              
+                {% endfor %}
+              
+              </div>
+
+
+            
+    
+          </div>
+    
+          <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon icofont-rounded-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon icofont-rounded-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+    
+        </div>
+      </div>
+    </section><!-- End Hero -->
+
+
+      <!--main Section-->
+      <div id="main">
+        <!-- ======= About Us Section ======= -->
+        <section id="about" class="about">
+          <div class="container" data-aos="fade-up">
+    
+            <div class="section-title">
+              <h2>About Us</h2>
+          
+            </div>
+    
+            <div class="row content">
+              <div class="col-lg-6">
+                <p>
+                  {{about.highlight_line|safe}}
+                </p>
+                <ul>
+                  <li><i class="icofont-tick-mark"></i> {{about.vision|safe}}</li>
+                  <li><i class="icofont-tick-mark"></i>{{about.mission|safe}}</li>
+                  <li><i class="icofont-tick-mark"></i>{{about.aim|safe}} </li>
+                </ul>
+              </div>
+              <div class="col-lg-6 pt-4 pt-lg-0 about-description">
+                <p>{{about.description1|slice:":270"|safe}}     ...
+                </p>
+                <a href="{% url 'main:aboutus' %}" class="btn-learn-more">Learn More</a>
+              </div>
+            </div>
+    
+          </div>
+        </section><!-- End About Us Section -->
+
+        <!-- ======= Featured Services Section ======= -->
+        <section id="featured-services" class="featured-services">
+          <div class="container" data-aos="fade-up">
+            <div class="section-title">
+              <h2>What We Do</h2>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                  <div class="icon"><img src="{% static 'assets/img/services/tranning and impowement.jpg' %}" alt="" class="img-fluid"></div>
+                  <div class="text-wrapper">
+                    <h4 class="title"><a href="">Tranning and Empowerment</a></h4>
+                    <p class="description">World Record Foundation is a global Organization with record holders & brandambassadors worldwide. We are headquartered in Kathmandu, Nepal. World Record Foundation is a global Organization with record holders & brandambassadors worldwide.</p>
+                    <a href="#" class="readmore">ReadMore</a>
+                  </div> 
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                  <div class="icon"><img src="{% static 'assets/img/services/image 2.jpg' %}" alt="" class=""></div>
+                  <div class="text-wrapper">
+                    <h4 class="title"><a href="">Mental & Physical Health Awareness</a></h4>
+                    <p class="description">World Record Foundation is a global Organization with record holders & brandambassadors worldwide. We are headquartered in Kathmandu, Nepal. World Record Foundation is a global Organization with record holders & brandambassadors worldwide.</p>
+                    <a href="#" class="readmore">ReadMore</a>
+                  </div> 
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                  <div class="icon"><img src="{% static 'assets/img/services/image 4.png' %}" alt="" class=""></div>
+                  <div class="text-wrapper">
+                    <h4 class="title"><a href="">Public Relation Services</a></h4>
+                    <p class="description">World Record Foundation is a global Organization with record holders & brandambassadors worldwide. We are headquartered in Kathmandu, Nepal. World Record Foundation is a global Organization with record holders & brandambassadors worldwide.</p>
+                    <a href="#" class="readmore">ReadMore</a>
+                  </div> 
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                  <div class="icon"><img src="{% static 'assets/img/services/image 5.jpg' %}" alt="" class=""></div>
+                  <div class="text-wrapper">
+                    <h4 class="title"><a href="">Ayurvedic Hospital & Research Center</a></h4>
+                    <p class="description">World Record Foundation is a global Organization with record holders & brandambassadors worldwide. We are headquartered in Kathmandu, Nepal. World Record Foundation is a global Organization with record holders & brandambassadors worldwide.</p>
+                    <a href="#" class="readmore">ReadMore</a>
+                  </div> 
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                  <div class="icon"><img src="{% static 'assets/img/memroy.png' %}" alt="" class=""></div>
+                  <div class="text-wrapper">
+                    <h4 class="title"><a href="">Memory Tranning</a></h4>
+                    <p class="description">World Record Foundation is a global Organization with record holders & brandambassadors worldwide. We are headquartered in Kathmandu, Nepal. World Record Foundation is a global Organization with record holders & brandambassadors worldwide..</p>
+                    <a href="#" class="readmore">ReadMore</a>
+                  </div> 
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                <div class="icon-box" data-aos="fade-up" data-aos-delay="500">
+                  <div class="icon"><img src="{% static 'assets/img/services/vocational Tranning.jpg' %}" alt="" class=""></div>
+                  <div class="text-wrapper">
+                    <h4 class="title"><a href="">Vocational Tranning</a></h4>
+                    <p class="description">World Record Foundation is a global Organization with record holders & brandambassadors worldwide. We are headquartered in Kathmandu, Nepal. World Record Foundation is a global Organization with record holders & brandambassadors worldwide.</p>
+                    <a href="#" class="readmore">ReadMore</a>
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div> 
+        </section><!-- End Featured Services Section -->
+
+        <!-- ======= Cta Section ======= -->
+        <section id="cta" class="cta">
+          <div class="container">
+    
+            <div class="row" data-aos="zoom-in">
+              <div class="col-lg-12 text-center ">
+                <h4>How We Work ?</h4>
+              
+                <p>World Record Foundation is a global Organization with record holders<br>
+                   & brandambassadors worldwide in Kathmandu, Nepal. <br>
+                 
+                 </p>
+                <a class="cta-btn align-middle" href="#">Donate Now</a>
+              </div>
+              
+            </div>
+    
+          </div>
+
+        <!-- Button trigger modal -->
+     
+                   
+
+              
+          <!-- ======= Blog Section ======= -->
+      <section id="blog" class="blog mt-4 pt-4 section-bg">
+        <div class="container">
+          <div class="section-title">
+            <h2 class="">News & Media</h2>
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+              <article class="entry">
+
+                <div class="entry-img">
+                  <img src="{% static 'assets/img/record.jpg' %}" alt="" class="img-fluid">
+                </div>
+
+                <h2 class="entry-title">
+                  <a href="">Dolorum optio tempore voluptas dignissimos </a>
+                </h2>
+
+                <div class="entry-meta">
+                  <ul>
+                    <li>
+                      <span class="comments-type">
+                        <i class="fa fa-comment-o"></i>
+                        <a href="#">130 comments</a>
+                      </span>
+                    </li>
+                    <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="#">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="#"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+                  </ul>
+                </div>
+
+                <div class="entry-content">
+                  <p>
+                    Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta zena prista maraeda talan mas indera.
+                  </p>
+                
+                </div>
+
+              </article><!-- End blog entry -->
+            </div>
+            <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+              <article class="entry">
+
+                <div class="entry-img">
+                  <img src="{% static 'assets/img/gallery/image 6.jpeg' %}" alt="" class="img-fluid">
+                </div>
+
+                <h2 class="entry-title">
+                  <a href="">Dolorum optio tempore voluptas dignissimos </a>
+                </h2>
+
+                <div class="entry-meta">
+                  <ul>
+                    <li>
+                    <span class="comments-type">
+                      <i class="fa fa-comment-o"></i>
+                      <a href="#">130 comments</a>
+                    </span>
+                  </li>
+                    <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="#">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="#"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+                  </ul>
+                </div>
+
+                <div class="entry-content">
+                  <p>
+                    Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta zena prista maraeda talan mas indera.
+                  </p>
+                  
+                </div>
+
+              </article><!-- End blog entry -->
+            </div>
+
+            <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+              <article class="entry">
+
+                <div class="entry-img">
+                  <img src="{% static 'assets/img/gallery/image 1.jpg' %}" alt="" class="img-fluid">
+                </div>
+
+                <h2 class="entry-title">
+                  <a href="">Dolorum optio tempore voluptas dignissimos </a>
+                </h2>
+
+                <div class="entry-meta">
+                  <ul>
+                    <li>
+                      <span class="comments-type">
+                        <i class="fa fa-comment-o"></i>
+                        <a href="#">130 comments</a>
+                      </span>
+                    </li>
+                    
+                    <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="#">John Doe</a></li>
+                    <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a href="#"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+                  </ul>
+                </div>
+
+                <div class="entry-content">
+                  <p>
+                    Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta zena prista maraeda talan mas indera.
+                  </p>
+                
+                </div>
+
+              </article><!-- End blog entry -->
+            </div>
+            
+
+          
+
+          
+
+            
+
+          </div>
+
+        
+
+        </div>
+      </section><!-- End Blog Section -->
+
+            
+
+        </div>
+        
+      
+
+{% endblock %}

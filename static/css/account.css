@@ -1,0 +1,47 @@
+.header img {
+  float: left;
+  width: 4%;
+  height: 4%;
+  border-radius: 50%;
+  background: white;
+}
+body {
+  background-image: url("/static/images/background.jpeg");
+  background-color: bisque;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  display: block;
+  background-attachment: fixed;
+}
+@media screen and (max-width: 991px) {
+  body {
+    background-color: rgb(127, 236, 218);
+  }
+
+  ul {
+    list-style-type: none;
+  }
+}
+
+footer {
+  padding: 0 30px;
+  height: auto;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+.shadow-card {
+  margin-top: 2%;
+  margin-bottom: 8%;
+  background-color: lightgray;
+  padding: 3%;
+}
+
+.content {
+  padding: 2%;
+  margin-left: 23%;
+  background-color: lightgray;
+  border: 1px solid;
+  width: 55%;
+}

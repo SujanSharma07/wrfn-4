@@ -1,0 +1,163 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<style>
+    .card-container {
+        margin-top: 4%;
+        background: #f8f1f1bf;
+        padding: 2%;
+        width: 30%;
+    }
+
+    @media only screen and (max-width: 900px) {
+        .card-container {
+            margin-top: 10%;
+            background: #f8f1f1bf;
+            padding: 2%;
+            width: 91%;
+
+        }
+
+    }
+
+
+
+.icon_small{
+    color:white;
+    display:block;
+    margin-top: 14px;
+    font-size: 11px;
+}
+</style>
+<header id="header">
+    <div class="container">
+        <div class="logo float-left">
+            <a href="{% url 'main:home' %}"><img src="{% static 'assets/img/logo  main.png' %}" alt=""
+                    class="img-fluid"></a>
+        </div>
+            <nav class="nav-menu float-right d-none d-lg-block ">
+                <ul class="">
+                            
+                    <li class="" title='Notifications'>
+                        <a href="{% url 'main:home' %}" class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-bell"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                            </svg>
+                            <small class='icon_small'>Alerts</small>
+                        </a>
+            
+                    </li>
+                    <li class="" title='All Members'>
+                        <a href="{% url 'main:all_members' %}" class=""> <i class="icofont-users-alt-4">
+            
+                                <small class='icon_small'>Members</small>
+            
+                            </i>
+                        </a>
+            
+            
+                    </li>
+            
+            
+                    <li class="" title='Web'>
+                        <a href="{% url 'main:web' %}" class=""> <i class="ri-dashboard-fill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-globe" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z" />
+                                </svg>
+                                <small class='icon_small'>Web</small>
+            
+                            </i></a>
+            
+            
+                    </li>
+            
+                    <li class="" title='Logout'>
+            
+                        <a href="{% url 'account:user_logout' %}" style="white-space: normal;
+                                                                        word-wrap: break-word;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                            </svg>
+                            <small class='icon_small'>Logout</small></a>
+            
+                    </li>
+            
+            
+            
+            
+            
+                </ul>
+            </nav><!-- .nav-menu -->
+
+    </div>
+</header><!-- End Header -->
+
+
+        <div class="flex items-center m-4 mb-16 sm:mb-20 sm:mx-16 sm:my-12 md:mx-24">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success">Personal Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success">Upload Documents</a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-success" class=''>Make Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active " class=''>Skills and Expertise</a> 
+                </li>
+            </ul>
+        </div>
+
+        <div class="content content-fixed content-auth">
+            <div class="container card-container">
+              
+                            <form method="post" action="{% url 'main:skills' %}">
+                                {% csrf_token %}
+                                <div class="media align-items-stretch justify-content-center ht-100p">
+                                    <div class="sign-wrapper mg-lg-r-50 mg-xl-r-60">
+                                        <div class="pd-t-20 wd-100p">
+                                            <h4 class="tx-color-01 mg-b-5">Update Account</h4>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    {% if form.errors %}
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <h4 class="alert-heading">Error!</h4>
+                                                        <p>{{ form.errors }}</p>
+                                                    </div>
+                                                    {% endif %}
+                                                </div>
+                                                <!--  {widget}<img class="country-select-flag" id="N" style="margin: 6px 4px 0" src="{country.flag}">
+                                -->
+                                                {{form}}
+                    
+                                            </div>
+                    
+                                        <div class="submit-form d-flex justify-content-center align-items-center">
+                                            <button type="submit" class="btn btn-success btn-save  mt-3">Save</button>
+                                        
+                                        </div>
+                                        <div class="d-flex justify-content-center align-items-center ">
+                                            <button type="submit" class="btn btn-link m-4">Skip</button>
+                                        
+                                        </div>
+                                        </div>
+                                    </div><!-- sign-wrapper -->
+                                </div><!-- media -->
+                            </form>
+                    
+                     
+            </div><!-- container -->
+        </div><!-- content -->
+
+{% endblock %}

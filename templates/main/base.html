@@ -1,0 +1,193 @@
+<!doctype html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>World Record home page - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css' %}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'assets/css/user-dashboard.css' %}" rel="stylesheet">
+
+
+<link rel="shortcut icon"  href="{% static 'images/icons/logo_png.png' %}">
+
+
+        <!--Custom CSS 
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        -->
+        <!--ICON TAG-->
+</head>
+
+<body>
+ <!--        <nav class="navbar navbar-expand-lg navbar-dark bg-info"">
+             <div class="header">
+                <a href="{% url 'main:home' %}">
+                    <img src="{% static 'images/icons/water_mark_logo.png' %}" alt="W.R.F.N" />
+                </a>
+            </div>
+            <div class="nav-link dropdown-toggle  mr-2 btn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    {% if document %}
+    <img src='{{document.profile.url}}' style="width:30px; height: 30px;border-radius: 50%;">
+    {% endif %}
+    <small>{{request.user.first_name|capfirst}}{{request.user.last_name|capfirst}}</small>
+
+        </div>
+            <div class="dropdown">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li>{% if document %}
+                    <img src='{{document.profile.url}}' style="width:25px; height: 25px;border-radius: 50%;">
+                    {% endif %}
+                    {{request.user.username}}
+                        {% if request.user.is_verified %}
+                
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle"
+                    viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                </svg>
+                {% else %}
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle"
+                    viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg>
+                {% endif %}
+            </li>
+                    
+                        <small>Membership Status: {% if request.user.is_verified %}Completed{% else %}Incomplete{% endif %}</small>
+                    <hr>
+                    <li><a class="dropdown-item btn" href="{% url 'main:profile' request.user.id %}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'account:user_logout' %}">Logout</a></li>
+                </ul>
+            </div>
+                
+            
+            
+
+                <a class="btn btn-light mr-2 nav-links" aria-current="page" title='Notifications' href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                </svg></a>
+
+                <a class="btn btn-light mr-2 nav-links" aria-current="page" title='Members' href="{% url 'main:all_members' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill"
+                    viewBox="0 0 16 16">
+                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    <path fill-rule="evenodd"
+                        d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                </svg>
+                </a>
+
+                              <div class="dropdown btn-group dropleft">
+                    
+                    <button role="button" type="button dropdown-toggle dropdown-toggle-split" class="btn" data-toggle="dropdown">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+                            viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                   </button>
+                    <ul class="dropdown-menu dropdown-menu-right"">
+                        <div class='services'>
+
+                        <div class="card" style="background-color:lightgray;">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Visit and use WRFN services</h5>
+                                <svg height="6" width="250">
+                                    <line x1="0" y1="0" x2="100%" y2="0" style="stroke:rgb(133, 123, 123);stroke-width:2" />
+                                </svg>
+                                <br>
+                                <a class='btn'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-credit-card"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z" />
+                                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
+                                        </svg> 
+                                        <center>Id Card</center>
+                                </a>
+                            </div>
+                        </div>
+                                                </div>
+
+                    </ul>
+
+                </div>
+
+
+               
+                   
+
+
+        </nav> -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <div class="alert alert-primary text-center alert-dismissible fade show" role="alert">
+        {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+        {% endfor %}
+</ul>
+{% endif %}
+
+    {% block body %}{% endblock %}
+
+
+<!--Balance footer-->
+    <!-- Optional JavaScript -->
+        <!-- Vendor JS Files -->
+        <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+        <script src="{% static 'assets/vendor/jquery-sticky/jquery.sticky.js' %}"></script>
+        <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/counterup/counterup.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+        
+        <!-- Template Main JS File -->
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        
+ 
+</body>
+
+</html>

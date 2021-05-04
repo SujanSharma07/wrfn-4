@@ -1,0 +1,244 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% block body %}
+<!-----Table with search-->
+
+<!-- favicon
+		============================================ -->
+<!-- Google Fonts
+		============================================ -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+<!-- Bootstrap CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/bootstrap.min.css' %}">
+<!-- Bootstrap CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/font-awesome.min.css' %}">
+<!-- owl.carousel CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'adminpanel/css/owl.theme.css' %}">
+<link rel="stylesheet" href="{% static 'adminpanel/css/owl.transitions.css' %}">
+<!-- animate CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/animate.css' %}">
+<!-- normalize CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/normalize.css' %}">
+<!-- meanmenu icon CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/meanmenu.min.css' %}">
+<!-- main CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/main.css' %}">
+<!-- educate icon CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/educate-custon-icon.css' %}">
+<!-- morrisjs CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/morrisjs/morris.css' %}">
+<!-- mCustomScrollbar CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/scrollbar/jquery.mCustomScrollbar.min.css' %}">
+<!-- metisMenu CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/metisMenu/metisMenu.min.css' %}">
+<link rel="stylesheet" href="{% static 'adminpanel/css/metisMenu/metisMenu-vertical.css' %}">
+<!-- calendar CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/calendar/fullcalendar.min.css' %}">
+<link rel="stylesheet" href="{% static 'adminpanel/css/calendar/fullcalendar.print.min.css' %}">
+<!-- x-editor CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/editor/select2.css' %}">
+<link rel="stylesheet" href="{% static 'adminpanel/css/editor/datetimepicker.css' %}">
+<link rel="stylesheet" href="{% static 'adminpanel/css/editor/bootstrap-editable.css' %}">
+<link rel="stylesheet" href="{% static 'adminpanel/css/editor/x-editor-style.css' %}">
+<!-- normalize CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/data-table/bootstrap-table.css' %}">
+<link rel="stylesheet" href="{% static 'adminpanel/css/data-table/bootstrap-editable.css' %}">
+<!-- style CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/style.css' %}">
+<!-- responsive CSS
+		============================================ -->
+<link rel="stylesheet" href="{% static 'adminpanel/css/responsive.css' %}">
+<!-- modernizr JS
+		============================================ -->
+<script src="{% static 'adminpanel/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Gallery</h3>
+                                    <a class="btn btn-success" href="{% url 'adminpanel:addgallery' %}">Add New</a>
+                                    
+                                    
+
+
+
+
+                           
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+    
+
+
+    <!-- Start Welcome area -->
+       
+        <!-- Static Table Start -->
+        <div class="data-table-area mg-b-15">
+            <div class="container-fluid" >
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sparkline13-list">
+                            <div class="sparkline13-hd">
+                                <div class="main-sparkline13-hd">
+                                    <h1>Gallery <span class="table-project-n">Data</span> Table</h1>
+                                </div>
+                            </div>
+                            <div class="sparkline13-graph" >
+                                <div class="datatable-dashv1-list custom-datatable-overright" >
+                                   
+                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                        data-show-columns="true" data-show-pagination-switch="true"
+                                        data-show-refresh="true" data-key-events="true" data-show-toggle="true"
+                                        data-resizable="true" data-cookie="true" data-cookie-id-table="saveId"
+                                        data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="rank" >#</th>
+                                                <th data-field="title" >Title</th>
+                                                <th scope="col">Enable/Disable</th>
+
+                                                <th data-field="date" >Date</th>
+                                                <th data-field="action">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for photo in photos %}
+                                            
+                                       
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td><a href="{% url 'adminpanel:gallery_detail' photo.id %}">{{photo.title}}</a></td>
+                                                <td data-checkbox="true">{% if photo.enable %}<input type='checkbox' onchange='b_enable({{photo.id}})' checked>
+                                                  {% else %}
+                                                  <input type='checkbox' onchange='g_enable({{photo.id}})'>
+                                                  {% endif %} Enable
+                                                
+                                                </td>
+                                                
+                                                <td>{{photo.date}}</td>
+                                                <td><a href="{% url 'adminpanel:deletegallery' photo.id %}" class="btn btn-danger">Delete</a>
+                                                <a href="{% url 'adminpanel:editgallery' photo.id %}" class="btn btn-primary">Edit
+                                                    Post</a></td>
+                                                
+                                            </tr>
+                                            {% endfor %}
+                           
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+            </div>
+            </div>
+            </div>
+            </div>
+<script type="text/javascript">
+
+  function g_enable(id) {
+    URL = window.location.href + "e_gallery/" + String(id);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", URL, true);
+    xhttp.send();
+  }
+</script>
+
+    <!-- jquery
+		============================================ -->
+    <script src="{% static 'adminpanel/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/bootstrap.min.js' %}"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/wow.min.js' %}"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/jquery-price-slider.js' %}"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/jquery.meanmenu.js' %}"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/owl.carousel.min.js' %}"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/jquery.sticky.js' %}"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/jquery.scrollUp.min.js' %}"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'adminpanel/js/scrollbar/mCustomScrollbar-active.js' %}"></script>
+    <!-- metisMenu JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/metisMenu/metisMenu.min.js' %}"></script>
+    <script src="{% static 'adminpanel/js/metisMenu/metisMenu-active.js' %}"></script>
+    <!-- data table JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'adminpanel/js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'adminpanel/js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'adminpanel/js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'adminpanel/js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'adminpanel/js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'adminpanel/js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'adminpanel/js/data-table/bootstrap-table-export.js' %}"></script>
+    <!--  editable JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/editable/jquery.mockjax.js' %}"></script>
+    <script src="{% static 'adminpanel/js/editable/mock-active.js' %}"></script>
+    <script src="{% static 'adminpanel/js/editable/select2.js' %}"></script>
+    <script src="{% static 'adminpanel/js/editable/moment.min.js' %}"></script>
+    <script src="{% static 'adminpanel/js/editable/bootstrap-datetimepicker.js' %}"></script>
+    <script src="{% static 'adminpanel/js/editable/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'adminpanel/js/editable/xediable-active.js' %}"></script>
+    <!-- Chart JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/chart/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'adminpanel/js/peity/peity-active.js' %}"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/tab.js' %}"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/plugins.js' %}"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/main.js' %}"></script>
+    <!-- tawk chat JS
+		============================================ -->
+    <script src="{% static 'adminpanel/js/tawk-chat.js' %}"></script>
+
+{% endblock %}

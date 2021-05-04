@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'assets/css/base.css' %}" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/about.css" class=""> -->
+    <link rel="stylesheet" href="{% static 'assets/css/blog.css' %}" class="">
+            <link rel="shortcut icon" href="{% static 'images/icons/logo_png.png' %}">
+
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+        <div class="hero-container">
+            <div class="title">
+                <h1 class="text-white text-center ">Blog</h1>
+            </div>
+
+        </div>
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs ======= -->
+        <!-- <section id="breadcrumbs" class="breadcrumbs">
+              <div class="container">
+        
+                <ol>
+                  <li><a href="index.html">Home</a></li>
+                  <li>Blog</li>
+                </ol>
+                <h2>Blog</h2>
+        
+              </div>
+            </section> -->
+        <!-- End Breadcrumbs -->
+
+        <!-- ======= Blog Section ======= -->
+        <section id="blog" class="blog">
+            <div class="container">
+
+                <div class="row">
+                    {% for blog in blogs %}
+                    <div class="col-lg-4  col-md-6 d-flex align-items-stretch" data-aos="fade-up">
+                        <article class="entry">
+                            
+                             <div class="entry-img">
+                                <img src="{{blog.photo.url}}" alt="" class="img-fluid">
+                            </div> 
+
+                            <h2 class="entry-title">
+                                <a href="{% url 'main:blog_detail' blog.id %}">{{blog.title|safe}}</a>
+                            </h2>
+
+                            <div class="entry-meta">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="icofont-user"></i> <a
+                                            href="">{{blog.author|capfirst|safe}}</a></li>
+                                    <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <a
+                                            href="#"><time datetime="2020-01-01">{{blog.date|date}}</time></a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="entry-content">
+                                <p>
+                                   {{blog.highlight_line|safe}}  ...
+                                </p>
+                                <div class="read-more">
+                                    <a href="{% url 'main:blog_detail' blog.id %}">Read More</a>
+                                </div>
+                            </div>
+
+                        </article><!-- End blog entry -->
+                    </div>
+
+                    {% endfor %}
+                    
+                </div>
+
+                <div class="blog-pagination" data-aos="fade-up">
+                    {% if blogs.has_previous %}
+                    <a href="?page1={{ blogs.previous_page_number }}"> previous </a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}
+                    </span>
+                    {% if blogs.has_next %}
+                    <a href="?page1={{ blogs.next_page_number }}"> next </a>
+                    {% endif %}
+                    
+                </div>
+
+            </div>
+        </section><!-- End Blog Section -->
+
+    </main><!-- End #main -->
+
+
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

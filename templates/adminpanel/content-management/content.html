@@ -1,0 +1,155 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <h3 class="box-title">Add Page</h3>
+
+        <!-- Column -->
+        <form method="post" action="#" enctype="multipart/form-data">
+            {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Error!</h4>
+                <p>{{ form.errors }}</p>
+            </div>
+            {% endif %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="main" onchange='subclicked(this.value);' checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    Main Page
+                </label>
+            </div>
+         
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="sub" onchange='subclicked(this.value);'>
+                <label class="form-check-label" for="exampleRadios2">
+                    Sub Page
+                </label>
+            </div>
+             <div id='pageselector'>
+
+            </div>
+
+           
+
+            {% csrf_token %}
+            {{form|crispy}}
+            {{form.media}}
+            <button type="submit" class="btn btn-primary btn-save">Submit</button>
+
+        </form>
+        <div id="selectpage" style="display:none;">
+            <select class="form-control custom-select custom-select-lg mb-3" name='mainpageselect'>
+                {% for i in contents %}
+                {% if forloop.first %}
+                <option value="{{i.title}}">{{i.title}}</option>
+                {% else %}
+                <option value="{{i.title}}">{{i.title}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+
+
+        <h6 class="mt-4">All Contents </h6>
+
+
+        <table class="table table-striped table-bordered table-hover table-primary m-4 ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Main page</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Enable/Disable</th>
+                    <th scope="col">Subpages</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for content in contents %}
+                <tr id="content_{{content.id}}">
+                    <td>{{forloop.counter}}</td>
+                    <td>{% if content.enable %}<span style='color:green;'>{{content.title}}</span>{% else %}<span style='color:red;'>{{content.title}}</span>{% endif %}</td>
+                    <td>{{content.position}}</td>
+                    <td data-checkbox="true">{% if content.enable %}<input type='checkbox' onchange='c_enable({{content.id}})' checked>
+                        {% else %}
+                        <input type='checkbox' onchange='c_enable({{content.id}})'>
+                        {% endif %} Enable
+                    
+                    </td>
+                    <td >{% for i in content.get_sub %}<a href="{% url 'adminpanel:editsubpage' i.id%}">{% if i.enable %} <span style='color:green;'>{{i.title}}</span>{% else %}<span style='color:red;'>{{i.title}}</span>{% endif %}</a>  , {% endfor %}
+
+                    </td>
+                    <td><a class='btn btn-primary' href="{% url 'adminpanel:editcontent' content.id %}">Edit</a>
+                        <button class='btn btn-danger' onclick='c_delete({{content.id}})'>Delete</button></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+
+
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script type="text/javascript">
+
+        function c_enable(id) {
+            URL = window.location.href + "e_content/" + String(id);
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", URL, true);
+        xhttp.send();
+    }
+
+
+
+     function subclicked(value) {
+            var selection = document.getElementById("selectpage").innerHTML;
+            if (value == 'sub') {
+                document.getElementById("pageselector").innerHTML = selection;
+            }
+            else {
+                document.getElementById("pageselector").innerHTML = '';
+
+            }
+        }
+        
+    </script>
+
+
+{% endblock %}
